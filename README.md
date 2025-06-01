@@ -1,6 +1,8 @@
 # 🧰 Inventory Management Solution
 
-![image]https://github.com/jhherre3/Inventory-Management-Solution/blob/main/examplepage/homepage.png
+![Homepage Preview](https://raw.githubusercontent.com/jhherre3/Inventory-Management-Solution/main/examplepage/homepage.png)
+
+
 A clean, responsive **Flask-based tool tracking app** for makers, engineers, workshops, and small teams.  
 Easily manage tools, storage locations, tags, and images — with built-in QR code generation for fast access from mobile devices.
 
