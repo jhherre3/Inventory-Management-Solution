@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tool Inventory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+  <!-- ✅ Custom Style -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .tool-card {
+      text-align: center;
+      padding: 2em 1em;
+      margin-bottom: 1em;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+
+<body class="container mt-4">
+
+  <!-- ✅ Page Title -->
+  <h1 class="mb-4">🔧 Tool Inventory Tracker</h1>
+
+  <!-- ✅ Search Input -->
+  <div class="mb-4">
+    <input id="searchInput" type="text" class="form-control" placeholder="🔍 Search tools by name, location, serial, or tag...">
+  </div>
+
+  <!-- ✅ Add New Tool -->
+  <a href="/add" class="btn btn-primary mb-3">➕ Add New Tool</a>
+
+  <!-- ✅ Tool Cards -->
+  {% for tool in tools %}
+  <div class="tool-card">
+
+    <!-- Tool Name -->
+    <h4>
+      <a href="{{ url_for('tool_detail', tool_id=tool[0]) }}">{{ tool[2] }}</a>
+    </h4>
+
+    <!-- Tool Image or Placeholder -->
+    <div class="mx-auto mb-3" style="width: 100px; height: 100px; border-radius: 8px; overflow: hidden;">
+      {% if tool[7] %}
+        <img src="{{ url_for('static', filename='images/' ~ tool[7]) }}"
+             alt="Tool Image"
+             style="width: 100%; height: 100%; object-fit: cover;">
+      {% else %}
+        <div style="width: 100%; height: 100%; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+          <span class="text-muted">No Image</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Tool Metadata -->
+    <p><strong>Serial:</strong> {{ tool[1] }}</p>
+    <p><strong>Location:</strong> {{ tool[3] }}</p>
+
+    <!-- Tags -->
+    {% if tool[6] %}
+      <div class="mb-2">
+        {% for tag in tool[6].split(',') %}
+          <span class="badge bg-info text-dark me-1">{{ tag.strip() }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- QR Code Toggle -->
+    <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#qr{{ tool[0] }}">
+      📷 Show QR Code
+    </button>
+
+    <!-- QR Code Collapsible -->
+    <div id="qr{{ tool[0] }}" class="collapse mt-2">
+      <img src="{{ url_for('static', filename='qrcodes/' ~ tool[0] ~ '.png') }}" width="100" class="mt-2" alt="QR Code">
+    </div>
+
+  </div>
+  {% endfor %}
+
+  <!-- ✅ JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('searchInput');
+      const toolCards = document.querySelectorAll('.tool-card');
+      searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
+        toolCards.forEach(card => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(filter) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+
+  <!-- ✅ Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
 
