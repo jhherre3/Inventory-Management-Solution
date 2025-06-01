@@ -20,7 +20,7 @@ Easily manage tools, storage locations, tags, and images — with built-in QR co
 
 ## 📁 Folder Structure
 
-inventory_app/
+```inventory_app/
 ├── static/
 │   ├── qrcodes/
 │   └── images/
