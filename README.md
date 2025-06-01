@@ -34,3 +34,37 @@ inventory_app/
 ├── update_db.py
 ├── requirements.txt
 └── README.md
+```
+## Install Dependencies
+
+```
+pip install -r requirements.txt
+```
+
+## Run app locally 
+```
+python app.py
+```
+This will:
+
+Start a local server (default: http://0.0.0.0:60399)
+
+Auto-generate a SQLite database file named inventory.db if it doesn't already exist
+
+Create required folders: static/images/ and static/qrcodes/ for storing images and QR codes
+
+
+## Access the App 
+Open your browser and go to:
+```
+http://localhost:60399
+```
+You can now add tools, upload images, and use QR codes on any device on your local network.
+
+
+ 
+
+
+
+
+
